@@ -48,6 +48,7 @@ import { FilterButtonGroup } from '../filter_bar/filter_button_group/filter_butt
 import type { SuggestionsListSize } from '../typeahead/suggestions_component';
 import { TextBasedLanguagesEditor } from './text_based_languages_editor';
 import './query_bar.scss';
+import QuaiStatsLogo from './quai_stats_logo.svg';
 
 export const strings = {
   getNeedsUpdatingLabel: () =>
@@ -390,35 +391,112 @@ export const QueryBarTopRow = React.memo(
       return Boolean(props.showDatePickerAsBadge) && !shouldRenderQueryInput();
     }
 
+    const [lastClicked, setLastClicked] = useState<string | null>(null);
+
     function renderDatePicker() {
       if (!shouldRenderDatePicker()) {
         return null;
       }
-
+    
       const wrapperClasses = classNames('kbnQueryBar__datePickerWrapper');
-
+    
+      // Function to handle button clicks
+      const handleTimeButtonClick = (time: string) => {
+        onTimeChange({
+          start: `now-${time}`,
+          end: 'now',
+          isInvalid: false,
+          isQuickSelection: true,
+        });
+        setLastClicked(time); // Update the last clicked button
+      };
+    
+      // Function to generate button styles
+      const getButtonStyles = (time: string) => ({
+        backgroundColor: lastClicked === time ? '#007bff' : '#ffffff',
+        color: lastClicked === time ? 'white' : '#007bff',
+        padding: '10px 10px',
+        fontSize: '16px',
+        borderRadius: '4px',
+        border: '1px solid #007bff',
+        cursor: 'pointer',
+        transition: 'background-color 0.3s ease, color 0.3s ease',
+      });
+    
       return (
         <EuiFlexItem className={wrapperClasses}>
-          <SuperDatePicker
-            isDisabled={props.isDisabled}
+          <EuiFlexGroup gutterSize="s" responsive={false}>
+            <EuiFlexItem grow={false}>
+              <button
+                onClick={() => handleTimeButtonClick('1h')}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.backgroundColor = '#0056b3';
+                  e.currentTarget.style.color = 'white';
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.backgroundColor = lastClicked === '1h' ? '#007bff' : '#ffffff';
+                  e.currentTarget.style.color = lastClicked === '1h' ? 'white' : '#007bff';
+                }}
+                style={getButtonStyles('1h')}
+              >
+                1 Hour
+              </button>
+            </EuiFlexItem>
+            <EuiFlexItem grow={false}>
+              <button
+                onClick={() => handleTimeButtonClick('8h')}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.backgroundColor = '#0056b3';
+                  e.currentTarget.style.color = 'white';
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.backgroundColor = lastClicked === '8h' ? '#007bff' : '#ffffff';
+                  e.currentTarget.style.color = lastClicked === '8h' ? 'white' : '#007bff';
+                }}
+                style={getButtonStyles('8h')}
+              >
+                8 Hours
+              </button>
+            </EuiFlexItem>
+            <EuiFlexItem grow={false}>
+              <button
+                onClick={() => handleTimeButtonClick('24h')}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.backgroundColor = '#0056b3';
+                  e.currentTarget.style.color = 'white';
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.backgroundColor = lastClicked === '24h' ? '#007bff' : '#ffffff';
+                  e.currentTarget.style.color = lastClicked === '24h' ? 'white' : '#007bff';
+                }}
+                style={getButtonStyles('24h')}
+              >
+                24 Hours
+              </button>
+            </EuiFlexItem>
+          </EuiFlexGroup>
+          {/* <SuperDatePicker
+            isDisabled={false}
             start={props.dateRangeFrom}
             end={props.dateRangeTo}
             isPaused={props.isRefreshPaused}
-            refreshInterval={props.refreshInterval}
-            onTimeChange={onTimeChange}
+            //refreshInterval={props.refreshInterval}
+            onTimeChange={(e) => {
+              console.log('timechangee',e)
+              onTimeChange}}
             onRefresh={onRefresh}
             onRefreshChange={props.onRefreshChange}
             showUpdateButton={false}
             recentlyUsedRanges={recentlyUsedRanges}
             locale={i18n.getLocale()}
-            commonlyUsedRanges={commonlyUsedRanges}
+            //commonlyUsedRanges={commonlyUsedRanges}
             dateFormat={uiSettings.get('dateFormat')}
             isAutoRefreshOnly={showAutoRefreshOnly}
             className="kbnQueryBar__datePicker"
             isQuickSelectOnly={isMobile ? false : isQueryInputFocused}
             width={isMobile ? 'full' : 'auto'}
             compressed={shouldShowDatePickerAsBadge()}
-          />
+          /> */}
         </EuiFlexItem>
       );
     }
@@ -469,6 +547,7 @@ export const QueryBarTopRow = React.memo(
         <EuiFlexItem grow={false}>
           <NoDataPopover storage={storage} showNoDataPopover={props.indicateNoData}>
             <EuiFlexGroup alignItems="center" responsive={false} gutterSize="s">
+            
               {shouldRenderDatePicker() ? renderDatePicker() : null}
               {shouldRenderUpdatebutton() ? button : null}
             </EuiFlexGroup>
@@ -502,7 +581,7 @@ export const QueryBarTopRow = React.memo(
       return (
         Boolean(props.showAddFilter) && (
           <EuiFlexItem grow={false}>
-            <AddFilterPopover
+            {/* <AddFilterPopover
               indexPatterns={props.indexPatterns}
               filters={props.filters}
               timeRangeForSuggestionsOverride={props.timeRangeForSuggestionsOverride}
@@ -510,7 +589,7 @@ export const QueryBarTopRow = React.memo(
               onFiltersUpdated={props.onFiltersUpdated}
               buttonProps={{ size: shouldShowDatePickerAsBadge() ? 's' : 'm', display: 'empty' }}
               isDisabled={props.isDisabled}
-            />
+            /> */}
           </EuiFlexItem>
         )
       );
@@ -520,11 +599,12 @@ export const QueryBarTopRow = React.memo(
       return (
         (Boolean(props.showAddFilter) || Boolean(props.prepend)) && (
           <EuiFlexItem grow={false}>
-            <FilterButtonGroup
+            
+            {/* <FilterButtonGroup
               items={[props.prepend, renderAddButton()]}
               attached={renderFilterMenuOnly()}
               size={shouldShowDatePickerAsBadge() ? 's' : 'm'}
-            />
+            /> */}
           </EuiFlexItem>
         )
       );
@@ -532,8 +612,9 @@ export const QueryBarTopRow = React.memo(
 
     function renderQueryInput() {
       return (
-        <EuiFlexGroup gutterSize="s" responsive={false}>
-          {!renderFilterMenuOnly() && renderFilterButtonGroup()}
+        <EuiFlexGroup gutterSize="s" responsive={false} alignItems='center' >
+          <img src={QuaiStatsLogo} alt="Quai Stats Logo" height="fit-content" width="350" />
+          {/* {!renderFilterMenuOnly() && renderFilterButtonGroup()}
           {shouldRenderQueryInput() && (
             <EuiFlexItem data-test-subj="unifiedQueryInput">
               <QueryStringInputUI
@@ -571,7 +652,7 @@ export const QueryBarTopRow = React.memo(
                 }}
               />
             </EuiFlexItem>
-          )}
+          )} */}
         </EuiFlexGroup>
       );
     }
@@ -617,6 +698,7 @@ export const QueryBarTopRow = React.memo(
               gutterSize="s"
               justifyContent={shouldShowDatePickerAsBadge() ? 'flexStart' : 'flexEnd'}
               wrap
+              alignItems='center'
             >
               {renderDataViewsPicker()}
               <EuiFlexItem

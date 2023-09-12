@@ -116,7 +116,7 @@ export function Header({
       />
       <SkipToMainContent />
 
-      <HeaderTopBanner headerBanner$={observables.headerBanner$} />
+      {/* <HeaderTopBanner headerBanner$={observables.headerBanner$} />
       <header className={className} data-test-subj="headerGlobalNav">
         <div id="globalHeaderBars" className="header__bars">
           <EuiHeader
@@ -240,7 +240,7 @@ export function Header({
             </EuiHeaderSection>
           </EuiHeader>
         </div>
-      </header>
+      </header> */}
     </>
   );
 }

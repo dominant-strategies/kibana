@@ -113,16 +113,6 @@ export function LensEmbeddable(props: Props) {
 const LensWrapper = styled.div`
   height: 100%;
 
-  .embPanel__optionsMenuPopover {
-    visibility: collapse;
-  }
-
-  &&&:hover {
-    .embPanel__optionsMenuPopover {
-      visibility: visible;
-    }
-  }
-
   && .embPanel--editing {
     border-style: initial !important;
     :hover {

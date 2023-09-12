@@ -40,7 +40,6 @@ export const DashboardsTable: React.FC = () => {
 
   const [filteredItems, setFilteredItems] = useState(items);
   const [searchQuery, setSearchQuery] = useState('');
-
   const search = useMemo<Search>(() => {
     const debouncedSetSearchQuery = debounce(setSearchQuery, INPUT_TIMEOUT);
 

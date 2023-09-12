@@ -216,13 +216,6 @@ export function PanelHeader({
         {renderBadges(badges, embeddable)}
       </h2>
       {renderNotifications(notifications, embeddable)}
-      <PanelOptionsMenu
-        isViewMode={isViewMode}
-        getActionContextMenuPanel={getActionContextMenuPanel}
-        closeContextMenu={closeContextMenu}
-        title={title}
-        index={index}
-      />
     </figcaption>
   );
 }

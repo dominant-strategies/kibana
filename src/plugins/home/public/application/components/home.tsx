@@ -112,7 +112,7 @@ export class Home extends Component<HomeProps, State> {
   }
 
   public skipWelcome() {
-    this.props.localStorage.setItem(KEY_ENABLE_WELCOME, 'false');
+    this.props.localStorage.setItem(KEY_ENABLE_WELCOME, 'true');
     if (this._isMounted) this.setState({ isWelcomeEnabled: false });
   }
 

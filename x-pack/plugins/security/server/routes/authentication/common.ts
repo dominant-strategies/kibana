@@ -152,7 +152,7 @@ export function defineCommonRoutes({
       });
 
       if (authenticationResult.redirected() || authenticationResult.succeeded()) {
-        const dashboardURL = '/xjc/app/dashboards#/view/42c8bea0-c347-11ed-97a4-9f17539a647d'
+        const dashboardURL = '/app/dashboards#/view/42c8bea0-c347-11ed-97a4-9f17539a647d'
         return response.ok({
           body: { location: dashboardURL }, //authenticationResult.redirectURL || redirectURL
           headers: authenticationResult.authResponseHeaders,

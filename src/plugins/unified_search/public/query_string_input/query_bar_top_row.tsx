@@ -413,12 +413,12 @@ export const QueryBarTopRow = React.memo(
     
       // Function to generate button styles
       const getButtonStyles = (time: string) => ({
-        backgroundColor: lastClicked === time ? '#007bff' : '#ffffff',
-        color: lastClicked === time ? 'white' : '#007bff',
+        backgroundColor: lastClicked === time ? '#e22901' : '#ffffff',
+        color: lastClicked === time ? 'white' : '#e22901',
         padding: '10px 10px',
         fontSize: '16px',
         borderRadius: '4px',
-        border: '1px solid #007bff',
+        border: '1px solid #e22901',
         cursor: 'pointer',
         transition: 'background-color 0.3s ease, color 0.3s ease',
       });
@@ -430,12 +430,12 @@ export const QueryBarTopRow = React.memo(
               <button
                 onClick={() => handleTimeButtonClick('1h')}
                 onMouseOver={(e) => {
-                  e.currentTarget.style.backgroundColor = '#0056b3';
+                  e.currentTarget.style.backgroundColor = '#e22901';
                   e.currentTarget.style.color = 'white';
                 }}
                 onMouseOut={(e) => {
-                  e.currentTarget.style.backgroundColor = lastClicked === '1h' ? '#007bff' : '#ffffff';
-                  e.currentTarget.style.color = lastClicked === '1h' ? 'white' : '#007bff';
+                  e.currentTarget.style.backgroundColor = lastClicked === '1h' ? '#e22901' : '#ffffff';
+                  e.currentTarget.style.color = lastClicked === '1h' ? 'white' : '#e22901';
                 }}
                 style={getButtonStyles('1h')}
               >
@@ -446,12 +446,12 @@ export const QueryBarTopRow = React.memo(
               <button
                 onClick={() => handleTimeButtonClick('8h')}
                 onMouseOver={(e) => {
-                  e.currentTarget.style.backgroundColor = '#0056b3';
+                  e.currentTarget.style.backgroundColor = '#e22901';
                   e.currentTarget.style.color = 'white';
                 }}
                 onMouseOut={(e) => {
-                  e.currentTarget.style.backgroundColor = lastClicked === '8h' ? '#007bff' : '#ffffff';
-                  e.currentTarget.style.color = lastClicked === '8h' ? 'white' : '#007bff';
+                  e.currentTarget.style.backgroundColor = lastClicked === '8h' ? '#e22901' : '#ffffff';
+                  e.currentTarget.style.color = lastClicked === '8h' ? 'white' : '#e22901';
                 }}
                 style={getButtonStyles('8h')}
               >
@@ -462,12 +462,12 @@ export const QueryBarTopRow = React.memo(
               <button
                 onClick={() => handleTimeButtonClick('24h')}
                 onMouseOver={(e) => {
-                  e.currentTarget.style.backgroundColor = '#0056b3';
+                  e.currentTarget.style.backgroundColor = '#e22901';
                   e.currentTarget.style.color = 'white';
                 }}
                 onMouseOut={(e) => {
-                  e.currentTarget.style.backgroundColor = lastClicked === '24h' ? '#007bff' : '#ffffff';
-                  e.currentTarget.style.color = lastClicked === '24h' ? 'white' : '#007bff';
+                  e.currentTarget.style.backgroundColor = lastClicked === '24h' ? '#e22901' : '#ffffff';
+                  e.currentTarget.style.color = lastClicked === '24h' ? 'white' : '#e22901';
                 }}
                 style={getButtonStyles('24h')}
               >
@@ -524,7 +524,8 @@ export const QueryBarTopRow = React.memo(
             isLoading={props.isLoading}
             onClick={onClickSubmitButton}
             size={shouldShowDatePickerAsBadge() ? 's' : 'm'}
-            color={props.isDirty ? 'success' : 'primary'}
+            color={'success'}
+            style={{ backgroundColor: '#e22901', color: 'white' }}
             fill={props.isDirty}
             needsUpdate={props.isDirty}
             data-test-subj="querySubmitButton"
